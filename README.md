@@ -80,7 +80,7 @@ A key feature of the conversational AIs is task-oriented dialogue: A feature tha
      2. Ensure that the bot respond with movies.
       
 
-## Feature Four : [Stoke market]
+## Feature Four : [Stock market]
 
 - As a user, I want to ask bot about the stoke market, so he will respond with prices
     - given [the user input]
