@@ -1,4 +1,4 @@
-# magazine
+# magazine (chatbot)
 
 ## Team members
 
