@@ -21,7 +21,7 @@ The chatbot can offer the user detailed reports using AI implemented the data co
 ## Scope
 - IN
 - **What will your product do?**
-- 
+ 
 chat bots that are able to interact with users through command lines. Users will be able to select a number of tasks that offers like searching and translator and display it in one place.
 - Out
 - **What will your product not do?**
