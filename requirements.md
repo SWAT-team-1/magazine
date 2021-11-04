@@ -53,7 +53,7 @@ This app does not support topics than topics that offers
 
 - **List the functionality of your product.**
 
-- The app greet the user and chatiing with the him.
+- The app greet the user and chatiing with the user.
 - A user can select one of the topic that offers in the app.
 - A user can see the results data for the topic he choose
 
