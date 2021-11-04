@@ -9,5 +9,6 @@
 
 ## Project Idea
 
-Chat bot in the command line that gives prompts based on the user's answer. It will give the user topics to explore (weather , sports , movies etc ...)
-the programe aim to create a friendly chat bot that will help users to get data about specific topics , also to search and do some tasks. In the command line program. 
+Chat bot in the command line will give prompts based on the user's answer. It will give the user topics to explore (weather , sports , movies etc ...)
+
+A key feature of the conversational AIs is task-oriented dialogue: A feature that lets the user access information or topics or do some tasks through chatting. Thus, the need for domain-specific chatbots arises: a series of task-focused chat bots that are able to interact with users through command lines that help them with completing tasks like get data and do some tasks.
