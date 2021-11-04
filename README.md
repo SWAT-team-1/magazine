@@ -89,7 +89,7 @@ A key feature of the conversational AIs is task-oriented dialogue: A feature tha
       
 - Acceptance Tests
 
-      1. Ensure that the bot respond with right stock market prices.
+     1. Ensure that the bot respond with right stock market prices.
                   
 ### Feature Five : [Translator]
 
