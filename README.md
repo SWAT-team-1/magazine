@@ -34,6 +34,7 @@ A key feature of the conversational AIs is task-oriented dialogue: A feature tha
     - then [bot will quit]
      
 - Acceptance Tests
+
     1. Ensure that the bot respond right for each question .
     2. Ensure that the bot is ended when the user exit or quit.
        
@@ -53,6 +54,7 @@ A key feature of the conversational AIs is task-oriented dialogue: A feature tha
     - then [bot respond with weather state]
 
 - Acceptance Tests
+       
        1. Ensure that the bot respond with right date.
        2. Ensure that the bot respond with right time.
        3. Ensure that the bot respond with right weather state for the wanted location.
@@ -73,6 +75,7 @@ A key feature of the conversational AIs is task-oriented dialogue: A feature tha
     - then [bot respond with recommended or the best movies]
       
 - Acceptance Tests
+
       1. Ensure that the bot respond with right sport match schedule.
       2. Ensure that the bot respond with movies.
       
@@ -85,13 +88,16 @@ A key feature of the conversational AIs is task-oriented dialogue: A feature tha
     - then [bot respond with stock market prices]
       
 - Acceptance Tests
+
       1. Ensure that the bot respond with right stock market prices.
                   
 ### Feature Five : [Translator]
+
 - As a user, I want to write in English and bot can translate to other languages
     - given [the user input]
     - when [user typed translate]
     - then [bot respond with the translated words]
  
 - Acceptance Tests
+
       1. Ensure that the bot respond with right translated words.
