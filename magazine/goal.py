@@ -63,10 +63,10 @@ def get_all_data1(url):
             goal_result_team_home =j.find_all("b", class_="match-row__goals")[0].text
             team_list+= f"Competition {competition_name} Away Team  {team_away} score: {goal_result_team_away} against Home Team  {team_home} score: {goal_result_team_home}\n"
             
-    print( team_list)
+    return team_list
 
 
 if __name__ =='__main__':
 
-    get_all_data1(goal_url)
+    print(get_all_data1(goal_url))
     
