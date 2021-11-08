@@ -77,41 +77,40 @@ def get_all_data1(url):
             team_list+= f"****** {football} Macth Time {football} ******"
             Competition_string+=f"****** {trophy} Competition {competition_name} {trophy} ******" 
             match_time+=f" ****** {date} {time} {date} ******"
-            team_string+=f"****** Away Team :{team_away} vs Home Team :{team_home} ******"
+            team_string+=f"****** Away Team Name > {team_away} < vs Home Team Name > {team_home} < ******"
             score_string+=f"****** score Away Team: {goal_result_team_away}  score Home Team : {goal_result_team_home} ******"
             data = {
              "competition_name": competition_name,
              }
             
         
-    print('''   
-************************************************************************
-****** Welcome from the sport section\U000026BD \U0001F3BE \U0001F3C0 ******
-****** Please enter which competition you want to see live scores from  ******
-************************************************************************''')
-    for i in range(len(competition_list)):
-        print('''****** -------------------******''')
-        print(f'****** {trophy} {competition_list[i]} {trophy}******')
+#     print('''   
+#  ************************************************************************
+#  ****** Welcome from the sport section\U000026BD \U0001F3BE \U0001F3C0 **************************
+#  ************************************************************************''')
+#     for i in range(len(competition_list)):
+#         print(''' ****** competition list ******''')
+#         print(f' ****** {trophy} {competition_list[i]} {trophy}******')
 
-    response = input('****** type competition name or q for quiting > ').strip().title()
-    while response != 'Q':
-       found=True
-       for order_item in data.values():
-            if order_item == response:
-                 found=False
-                 print(f" {Competition_string} ")
-                 print(f" {team_list} ")
-                 print(f"{match_time}")
-                 print(f" {team_string} ")
-                 print(f" {score_string} ")
+#     response = input(' ****** type competition name or q for quiting > ').strip().title()
+#     while response != 'Q':
+#        found=True
+#        for competition_item in competition_list:
+#             if competition_item == response:
+#                  found=False
+#                  print(f" {Competition_string} ")
+#                  print(f" {team_list} ")
+#                  print(f"{match_time}")
+#                  print(f" {team_string} ")
+#                  print(f" {score_string} ")
                  
-            if found:  
-                print(f" ****** {response}  this competition not found  ******")     
-       response=input(' ******search for anther competition or q for quiting  >').strip().title()
-    print("I hope you get the infromtion you need")
+#             if found:  
+#                 print(f" ****** {response}  this competition not found  ******")     
+#        response=input(' ****** search for anther competition or q for quiting  >').strip().title()
+#     print("I hope you get the infromtion you need")
 
               
-    return data.values()
+    return competition_list
 
 
 
@@ -120,55 +119,5 @@ if __name__ =='__main__':
     
     print(get_all_data1(goal_url))
    
-#    print('''   
-#                 **************************************
-#                 **    Welcome from the sport section\U000026BD \U0001F3BE \U0001F3C0		   **
-#                 **    Please enter which competition you want to see live scores.    **
-#                 **************************************
-#                             FA Cup
-#                             --------------
-#                             UEFA Champions League
-#                             --------------
-#                             UEFA Europa League
-#                             --------------
-#                             UEFA Europa Conference League
-#                             --------------
-#                             Premier League
-#                             --------------
-#                             Primera División
-#                             --------------
-#                             Serie A
-#                             --------------
-#                             Bundesliga
-#                             --------------
-#                             Ligue 1
-#                             --------------
-#                             FIFA Club World Cup
-#                             --------------
-#                             Copa del Rey
-#                             --------------
-#                             Coppa Italia
-#                             --------------
-#                             League Cup
-#                             --------------
-#                             UEFA Nations League
-#                             --------------
-#                             WC Qualification Europe
-#                             --------------
-#                             WC Qualification South America
-#                             --------------
-#                             Friendlies
-#                             --------------
-#                             "Women's Super League"
-#                             --------------
-#                             "UEFA Women's Champions League"
-#                             --------------
-#                                 ''')
-#    response = input('>').strip().title()
-#    while response != 'Quit'or 'q':
-#        found=True
-#        for order in competition_list:
-#            if order == response:
-#                  found = False
-#                  print(f"** {value} order of {response} have been added to your meal **")
+
    
