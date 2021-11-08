@@ -3,8 +3,8 @@ import colorama
 colorama.init()
 from colorama import Fore, Style
 import emoji
-
-api_key = "082f8afa8423e4fa6ac472b17510d896"
+from api_key import api_key
+api_key = api_key
 emoji_dic = {'clear sky':':sun:','overcast clouds':':thought_balloon:' ,'few clouds':':sun_behind_cloud:','scattered clouds':':thought_balloon:','Boken clouds':':thought_balloon:','Shower rain':':cloud with rain:' ,'rain':':sun_behind_rain_cloud:','thunderstorm':':cloud_with_lightning:','snow':':snowflake:','mist':':fog:'}
 
 def get_weather(city_name):
