@@ -84,30 +84,30 @@ def get_all_data1(url):
              }
             
         
-#     print('''   
-#  ************************************************************************
-#  ****** Welcome from the sport section\U000026BD \U0001F3BE \U0001F3C0 **************************
-#  ************************************************************************''')
-#     for i in range(len(competition_list)):
-#         print(''' ****** competition list ******''')
-#         print(f' ****** {trophy} {competition_list[i]} {trophy}******')
+    print('''   
+ ************************************************************************
+ ****** Welcome from the sport section\U000026BD \U0001F3BE \U0001F3C0 **************************
+ ************************************************************************''')
+    for i in range(len(competition_list)):
+        print(''' ****** competition list ******''')
+        print(f' ****** {trophy} {competition_list[i]} {trophy}******')
 
-#     response = input(' ****** type competition name or q for quiting > ').strip().title()
-#     while response != 'Q':
-#        found=True
-#        for competition_item in competition_list:
-#             if competition_item == response:
-#                  found=False
-#                  print(f" {Competition_string} ")
-#                  print(f" {team_list} ")
-#                  print(f"{match_time}")
-#                  print(f" {team_string} ")
-#                  print(f" {score_string} ")
+    response = input(' ****** type competition name or q for quiting > ').strip().title()
+    while response != 'Q':
+       found=True
+       for competition_item in competition_list:
+            if competition_item == response:
+                 found=False
+                 print(f" {Competition_string} ")
+                 print(f" {team_list} ")
+                 print(f"{match_time}")
+                 print(f" {team_string} ")
+                 print(f" {score_string} ")
                  
-#             if found:  
-#                 print(f" ****** {response}  this competition not found  ******")     
-#        response=input(' ****** search for anther competition or q for quiting  >').strip().title()
-#     print("I hope you get the infromtion you need")
+            if found:  
+                print(f" ****** {response}  this competition not found  ******")     
+       response=input(' ****** search for anther competition or q for quiting  >').strip().title()
+    print("I hope you get the infromtion you need")
 
               
     return competition_list
