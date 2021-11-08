@@ -3,6 +3,7 @@ import magazine.long_resp as resp
 import colorama 
 colorama.init()
 from colorama import Fore, Style
+from magazine.weather import get_weather
 
 def message_probability(user_message, recognised_words, single_response=False, required_words=[]):
     """
@@ -51,6 +52,9 @@ def check_all_messages(message):
     response(resp.goodbye(), ['quit', 'q', 'exit','bye','goodbye','see you later', 'nice chatting to you, bye', 'till next time'])
     response(resp.r_advice, ['give', 'advice'], required_words=['advice'])
     response(resp.r_eating, ['what', 'you', 'eat'], required_words=['you', 'eat'])
+    response('In which Country or city', ['weather', 'temperature', 'what is the temperature', 'what is the weather'])
+    response(resp.date(),['today','date'])
+    response(resp.time(),['time'])
 
     best_match = max(highest_prob_list, key=highest_prob_list.get)
 
@@ -67,7 +71,11 @@ def get_response(user_input, user_name=None):
     """
     split_message = re.split(r'\s+|[,;?!.-]\s*', user_input.lower())
     response = check_all_messages(split_message)
-    
+    if response == 'In which Country or city':
+        print(Fore.GREEN + 'Bot: ' + response + Style.RESET_ALL)
+        print(Fore.BLUE + user_name.capitalize() +': ' + Style.RESET_ALL, end="")
+        user_input = input()
+        response = get_weather(user_input)
     return response
 
 
