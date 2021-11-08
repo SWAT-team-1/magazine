@@ -118,7 +118,7 @@ def get_all_data1(url):
 if __name__ =='__main__':
  
     
-    get_all_data1(goal_url)
+    print(get_all_data1(goal_url))
    
 #    print('''   
 #                 **************************************
