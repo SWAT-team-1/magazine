@@ -1,16 +1,13 @@
-from os import times
 import requests
 from bs4 import BeautifulSoup 
-import emoji
 
-# from itertools import zip_longest
-# import csv
+
 url = "https://www.tajcinemas.com/"
 def cinemas_details(url):
     """
     function to get title, type, description and time for movie
     """ 
-    # url = "https://www.tajcinemas.com/"
+
     result = requests.get(url)
     src = result.content
     soup = BeautifulSoup (src , 'html.parser')
@@ -24,36 +21,31 @@ def cinemas_details(url):
     
     all_data = []
     for i in range(len(movie_titles)-4):
-        all_data.append(f"**************************************************{i+1}*********************************************************")
-        all_data.append("-Movie name :"+movie_titles[i].text)
-        all_data.append("-Movie type: "+movie_types[i].text)
-        all_data.append("-Description of movie: "+movie_descriptions[i].text.strip())
+        all_data.append(f"    ******************************************************************{i+1}********************************************************     ")
+        all_data.append("\U0001F3A5:"+movie_titles[i].text)
+        all_data.append("\U0001F534:"+movie_types[i].text)
+        all_data.append("\U0001F4DD:"+movie_descriptions[i].text.strip())
         times = [time.text for time in movie_times[i].find_all("span", {"class": "time"})]
-        all_data.append(f'-Viewing times:' +', '.join(times))
-        all_data.append("-Running time: "+running_times[i].text.strip())
+        all_data.append(f'\U0001F55B:' +', '.join(times))
+        all_data.append("\U0000231B:"+running_times[i].text.strip())
 
     for i in range(len(all_data)):
         print(all_data[i])
+        print(" ")
 
     return all_data
-
-########################################################################################################
-    # file_list = [Movie_title , Movie_type, Movie_description , Movie_time]
-    # exported = zip_longest(*file_list)
-    # with open("test1.csv", 'w') as file:
-    #     wr= csv.writer(file)
-    #     wr.writerow(["Movie_title", "Movie_type", "Movie_description" ," Movie_time"])
-    #     wr.writerows(exported)
-
-    # return Movie_title , Movie_type , Movie_description , Movie_time
-########################################################################################################
 
 # cinemas_details(url)
 
 
 
+
+
 def movie_by_gen():
-    type_of = input("What kind of movie do you want?: ")
+    """
+    function to get movie by genre
+    """ 
+    type_of = input("What kind of movie do you want?:\U0001F50D ").capitalize() 
     url = f"https://data-imdb1.p.rapidapi.com/movie/byGen/{type_of}/"
 
     querystring = {"page_size":"50"}
@@ -65,18 +57,24 @@ def movie_by_gen():
     response = requests.request("GET", url, headers=headers, params=querystring)
     data = response.json()
     gen_list = []
-    print(f"List of {type_of} movies :")
+    print(f"                                         ****************************************")
+    print(f"                                         ********List of {type_of} movies \U0001F3A5 :********")
+    print(f"                                         *****************************************")
     print(" ")
     for i in range (10):
         gen_list.append (data['results'][i]['title'])
-        print(f'{i+1}-'+gen_list[i])
-        print("--------------------------")
-    # return gen_list
+        print(f'                                            {i+1}-'+gen_list[i])
+        print("                                            --------------------------")
+    return gen_list
+
 # movie_by_gen()
 
 
 
 def upcoming_movies():
+    """
+    function to get upcoming movies
+    """ 
     url = "https://data-imdb1.p.rapidapi.com/movie/order/upcoming/"
     querystring = {"page_size":"50"}
     headers = {
@@ -85,18 +83,25 @@ def upcoming_movies():
         }
     response = requests.request("GET", url, headers=headers, params=querystring)
     data = response.json()
-    
-    # upcoming_name = []
-    # upcoming_date = []
+    print(f"                                         ****************************************")
+    print(f"                                         ********List of Upcoming Movies \U0001F3A5 :****")
+    print(f"                                         *****************************************")
+    print(" ")
     for i in range (10):
-      print("-----------------------------")
       upcoming_name = data['results'][i]['title']
       upcoming_date = data['results'][i]['release']
-      print(f'Release Date for "{upcoming_name}" is {upcoming_date}')
-    
+      print(f'                                       Release Date for "{upcoming_name}" is {upcoming_date}')
+      print("                                       ----------------------------------------------------------")
+    # return upcoming_name,upcoming_date
 # upcoming_movies()
 
+
+
+
 def rating_movie():
+    """
+    function to get rating for movies
+    """ 
     url = "https://data-imdb1.p.rapidapi.com/movie/order/byRating/"
     querystring = {"page_size":"50"}
     headers = {
@@ -106,19 +111,28 @@ def rating_movie():
     
     response = requests.request("GET", url, headers=headers, params=querystring)
     data = response.json()
-
-    # rate_list = []
+    print(" ")
+    print(f"                                         ****************************************")
+    print(f"                                         ********List of Upcoming Movies \U0001F3A5 :****")
+    print(f"                                         *****************************************")
+    print(" ")
     for i in range (10):
         movie_name= (data['results'][i]['title'])
         movie_rate = ( data['results'][i]['rating'])
-        print(f'\U00002B50{movie_name} movie Rating is {movie_rate}')
-        print("---------------------------------------------")
-
+        print(f'                                \U00002B50{movie_name} movie Rating is {movie_rate}')
+        print("                                  ------------------------------------------------------")
+    return movie_name,movie_rate
 # rating_movie()
 
-def movies_by_year_and_genre(type_of_movie ,year_of_movie):
-    type_of_movie = input("What kind of movie do you want?: ")
-    year_of_movie = input("What year are you looking for?: ")
+
+
+
+def movies_by_year_and_genre():
+    """
+    function to get movie by genre
+    """ 
+    type_of_movie = input("What kind of movie do you want?:\U0001F50D ").capitalize() 
+    year_of_movie = input("What year are you looking for?:\U0001F50D ")
 
     url = f"https://data-imdb1.p.rapidapi.com/movie/byYear/{year_of_movie}/byGen/{type_of_movie}/"
     querystring = {"page_size":"50"}
@@ -129,13 +143,101 @@ def movies_by_year_and_genre(type_of_movie ,year_of_movie):
 
     response = requests.request("GET", url, headers=headers, params=querystring)
     data = response.json()
-    print("              *******************************")
-    print(f'              **List of {type_of_movie} movie in {year_of_movie}**')
-    print("              *******************************")
+    print(" ")
+    print("                                          *******************************")
+    print(f'                                         *List of {type_of_movie} movie in {year_of_movie}\U0001F3A5*')
+    print("                                          *******************************")
+    print(" ")
     for i in range (10):
         year_and_genre = (data['results'][i]['title'])
-        print(f'                        {year_and_genre}')
-        # print("               -------------------------------------")
+        print(f'                                              {year_and_genre}')
+        print("                                             ------------------------")
     return year_and_genre
 
 # movies_by_year_and_genre()
+
+
+def all_movie_function():
+    """
+    function to collect all functions
+    """ 
+    user_input = None
+    while user_input != 'q':
+
+        print('''   
+                                               \U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5
+                                               \U0001F4A5\U0001F4A5\U0001F3A5Movie Section \U0001F3A5\U0001F4A5\U0001F4A5
+                                               \U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5''')
+ 
+        user_input = input(f'''
+
+Choose from the list:
+
+\U0001F3A5 If you want to know the movies available in the cinema, write (1)
+\U0001F3A5 If you want to search for films by genre, write (2)
+\U0001F3A5 If you want to search for upcoming  movies, write (3)
+\U0001F3A5 If you want to search for movies rating , write(4) 
+\U0001F3A5 if you want to search for by genre and year, write(5)
+for quit, write (q)
+''')
+
+
+        if user_input == "1":
+            cinemas_details(url)
+            user_input = input(f'''
+Wirte (q)uit or (b)ack to list
+''')
+            if user_input == 'b':
+                continue
+
+        elif user_input == "2":
+            movie_by_gen()
+            user_input = input(f'''
+wirte (q)uit or (b)ack to list
+''')
+            if user_input == 'b':
+                continue
+
+        elif user_input == "3":
+            upcoming_movies()
+            user_input = input(f'''
+wirte (q)uit or (b)ack to list
+            ''')
+            if user_input == 'b':
+                continue
+
+
+        elif user_input == "4":
+            rating_movie()
+            user_input = input(f'''
+wirte (q)uit or (b)ack to list
+            ''')
+            if user_input == 'b':
+                continue
+
+        elif user_input == "5":
+            movies_by_year_and_genre()
+            user_input = input(f'''
+wirte (q)uit or (b)ack to list
+            ''')
+            if user_input == 'b':
+                continue
+
+        if user_input == 'q':
+            quit()
+        else :
+            continue
+            # user_input = input(f'''
+            # please Chose from list:*****************************************
+            # or q for quit
+            # (1) for cinemas details
+            # (2) for movie_by_gen
+            # (3) for upcoming_movies
+            # (4) for rating_movie
+            # (5) for movies_by_year_and_genre
+
+            # ''')
+
+
+if __name__ == '__main__':
+    all_movie_function()

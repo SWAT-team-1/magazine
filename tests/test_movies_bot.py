@@ -1,4 +1,4 @@
-from magazine.movies_bot import *
+from magazine.movies_bot import movie_by_gen,cinemas_details,upcoming_movies, rating_movie,upcoming_movies
 
 def test_cinemas_details():
     url = 'https://www.tajcinemas.com/'
@@ -8,13 +8,5 @@ def test_upcoming_movies():
     assert None == upcoming_movies()
 
 
-
-
-
-
-# def test_movies_by_year_and_genre(self):
-#     self.type_of_movie = "Drama"
-#     self.year_of_movie = 2000
-#     actual = movies_by_year_and_genre(self.type_of_movie,self.year_of_movie)
-#     expeected = None
-#     assert actual == expeected
+def test_movie_rate():
+    assert ('Pulp Fiction', 8.9) == rating_movie()
