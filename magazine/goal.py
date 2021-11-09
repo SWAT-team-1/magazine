@@ -11,9 +11,11 @@ def get_competition_name(url):
     soup = BeautifulSoup(html_text, "html.parser")
     competition_result = soup.find_all("span", class_="competition-name")
     competition_string = ""
+    competition_list=[]
     for competition in competition_result:
      competition_string+= f"{competition.parent.text}\n"
-    return competition_string
+     competition_list.append(competition.parent.text)
+    return competition_list
 
 "get team function take the url as an argument and return the team list"
 def get_team_name(url):
@@ -25,7 +27,7 @@ def get_team_name(url):
     match=''
     for x in range(0, len(team_list), 2):
       match+=('Home Team:{} Away Team: {}\n'.format(team_list[x], team_list[x+1]))
-    return match
+    return team_list
 
 "get goals function take the url as an argument and return the goal list"
 def get_goals(url):
@@ -37,7 +39,7 @@ def get_goals(url):
     score=''
     for x in range(0, len(goal_list), 2):
       score+=('Home Team Score:{} Away Team Score: {}\n'.format(goal_list[x], goal_list[x+1]))
-    return score
+    return goal_list
 
 "get all data function take the tow arguments and return the result of tow function "
 
@@ -51,17 +53,17 @@ def get_all_data1(url):
     competition_list=[]
     result =soup.find_all("div", class_="competition-matches")
     team_list=""
-    Competition_string=''
-    team_string=''
-    score_string=''
-    match_time=""
+    all_string=''
     competition_list=[]
-    clean_data={}
+    data_string=[]
+    count=0
+    
     """for loop to get the competition name """
     for x in result:
         competition_name = x.find("span", class_="competition-name").text.strip().title()
         match = x.find_all("div", class_="match-row")
         if match:
+            
             competition_list.append(competition_name)
         """for loop to get the teames name socre and match time """
         for j in match:
@@ -74,50 +76,37 @@ def get_all_data1(url):
             football="\U000026BD"*2
             trophy="\U0001F3C6"
             date="\U000023F3"+"\U0000231B"
-            team_list+= f"****** {football} Macth Time {football} ******"
-            Competition_string+=f"****** {trophy} Competition {competition_name} {trophy} ******" 
-            match_time+=f" ****** {date} {time} {date} ******"
-            team_string+=f"****** Away Team Name > {team_away} < vs Home Team Name > {team_home} < ******"
-            score_string+=f"****** score Away Team: {goal_result_team_away}  score Home Team : {goal_result_team_home} ******"
-            data = {
-             "competition_name": competition_name,
-             }
+            count+=1
+            team_list+= f" **************** {trophy} Competition {competition_name} {trophy} \n" f" ****************  {football} Macth {count} Time  {football} \n"f" ****************  {date} {time} {date} \n"f" **************** Away Team Name > {team_away} < vs Home Team Name > {team_home} < \n"f" **************** score Away Team: {goal_result_team_away}  score Home Team : {goal_result_team_home} \n"
+            all_string=team_list
             
+        data_string.append(all_string)
+        count=0
+        team_list=""
+        all_string=''
+    # print(data_string[0])    
         
     print('''   
  ************************************************************************
- ****** Welcome from the sport section\U000026BD \U0001F3BE \U0001F3C0 **************************
+ ***************** Welcome from the sport section\U000026BD \U0001F3BE \U0001F3C0 ***************
  ************************************************************************''')
+    print(''' ***************** Competition list *************************************''')
     for i in range(len(competition_list)):
-        print(''' ****** competition list ******''')
-        print(f' ****** {trophy} {competition_list[i]} {trophy}******')
+        
+        print(f' ***************** {trophy} {competition_list[i]} {trophy} ******************')
 
-    response = input(' ****** type competition name or q for quiting > ').strip().title()
+    response = input(' ***************** type competition name or q for quiting > ').strip().title()
     while response != 'Q':
-       found=True
-       for competition_item in competition_list:
-            if competition_item == response:
-                 found=False
-                 print(f" {Competition_string} ")
-                 print(f" {team_list} ")
-                 print(f"{match_time}")
-                 print(f" {team_string} ")
-                 print(f" {score_string} ")
-                 
-            if found:  
-                print(f" ****** {response}  this competition not found  ******")     
-       response=input(' ****** search for anther competition or q for quiting  >').strip().title()
-    print("I hope you get the infromtion you need")
-
-              
+        if  response in competition_list:
+            print(data_string[competition_list.index(response)])
+        else :
+            print(f" ***************** {response}  this competition not found  **********************")    
+        response=input(' ***************** search for anther competition or q for quiting  >').strip().title()
+    print("I hope you get the infromtion you need")       
     return competition_list
-
-
-
 if __name__ =='__main__':
- 
     
-    print(get_all_data1(goal_url))
+    get_all_data1(goal_url)
    
 
    
