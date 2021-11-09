@@ -1,5 +1,11 @@
 import random
+import datetime
+import emoji
 
+"""
+This file is to get the responses for the bot when 
+the user chatting with the bot depending on the user inputs
+"""
 r_eating = "I don't like eating anything because I'm a bot obviously!"
 r_advice = "If I were you, I will sleep!"
 
@@ -37,6 +43,22 @@ def good():
 
 def bad():
     response = 'Sad to hear that'
+    return response
+
+def date():
+    date = datetime.datetime.now()
+    now_date = date.strftime('%x')
+    today = date.strftime('%A')
+    emoji_chr = emoji.emojize(':calendar:')
+    response = f'Today is {today}, {now_date} {emoji_chr}'
+    return response
+
+def time():
+
+    time = datetime.datetime.now()
+    now_time = time.strftime('%X')
+    emoji_chr = emoji.emojize(':ten_o’clock:')
+    response = f'The time is {now_time} {emoji_chr}'
     return response
 
 if __name__ == '__main__':
