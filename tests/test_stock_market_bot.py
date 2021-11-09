@@ -22,3 +22,6 @@ def test_get_stock_table_report_names_type():
     actual = type(test_df['name'][0])
     expected = str
     assert actual == expected
+
+##########################################################
+

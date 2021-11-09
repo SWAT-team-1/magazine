@@ -53,47 +53,77 @@ def get_stock_table_report(url):
 
 
 def get_daily_stock_exchange(df):
-    # equasion of percentage
-    # percents = []
-    # for i in range(len(df.index)):
-    #     # change_price = df[int(float('change_price'))][i]
-    #     # opening_price = df['opening_price'][i]
-    #     df['change_price']
-    #     percentage_equagion = (df['change_price'][i].to_numeric()/df['opening_price'][i].to_numeric())*100
-    #     percents.append(percentage_equagion)
-
-    # # df["change_price"].to_numeric().replace({percentage_equagion}, inplace=True)
-    # percentage = df.set_index('percentage')
-    # percentage = '1%'
-
-    # for i in range(len(df.index)):
-    #     percentage = int(float(df[['change_price'][i]]))   
-
-    symbol_list = df[['symbol', 'name', 'change_price']].sort_values('change_price', ascending=False)
-    print (symbol_list)
-
-    response = input('****** Please enter the Stock symbol for more details (ex: ARBK) or q for quiting > ').strip().title().upper()
+    """
+    get_daily_stock_exchange : 
+    argument : dataframe
+    output : it does enteract with the user according to inputs
+    """
+    # print("******* MENU ==> Crypto Currency")
+    response = None
     while response != 'Q':
-        found=True
-        df_selected = df[df['symbol'] == response]
-        if len(df.index) > 0:
-            found=False            
-        print (df_selected)
-        break
+        print("******* MENU ==> Daily Stock Exchange (ASE) (1)")
+        print("******* MENU ==> Top Transactions (2)")
+        print("******* MENU ==> Search for Stock (3)")
+        response = input(
+            '****** Please choose from the menu >>> ').strip().title().upper()
+        ######## MENU ==> Daily Stock Exchange (ASE) ########
+        ######## Equasion of percentage ########
+        if response == '1':
+            percents = []
+            for i in range(len(df.index)):
+                percentage_equagion = round(
+                    ((float(df['change_price'][i])/float(df['opening_price'][i]))*100), 2)
+                percents.append(str(percentage_equagion)+' %')
+            df['percentage'] = percents
+            symbol_list = df[['symbol', 'name', 'percentage']].sort_values('percentage', ascending=False)
+            print('******* Daily Stock Exchange (ASE) *******' )
+            print(symbol_list.head(20))
 
-        if found:  
-            print(f" ****** {response} this stock is not found  ******")
-        response=input(' ******search for another stock or q for quiting  >').strip().title().upper()
+            # response = input('****** Please choose from the menu >>> ').strip().title().upper()
+        ######## MENU ==> Top Transactions ########
+        if response == '2':
+            for i in range(len(df.index)):
+                df['no_of_trans'][i] = int(df['no_of_trans'][i])
+
+            df_max = df[['name', 'symbol', 'last_closing_price', 'opening_price', 'high_price','low_price', 'no_of_trans']].sort_values('no_of_trans', ascending=False)
+            print('******* TOP TRANSACTIONS *******' )
+            print(df_max.head(15))
+
+        ######## MENU ==> Search for Stock ########
+        if response == '3':
+            # show all stocks symbols
+            list_of_Symbols = []
+            for j in range(len(df.index)):
+                list_of_Symbols.append(df['symbol'][j])
+            print('****** STOCKS => ', list_of_Symbols)
+            response = input(
+                '****** Please enter the Stock symbol for more details (ex: ARBK) or q for quiting / * for menu >>> ').strip().title().upper()
+            while response != 'Q':
+                if response == '*':
+                    break
+                found = True
+                df_selected = df[df['symbol'] == response]
+                if len(df_selected.index) > 0:
+                    found = False
+                    print(df_selected)
+                if found:
+                    print(
+                        f" ****** X {response} this stock is NOT found ..!  ******")
+
+                response = input(' ****** Search for another stock or (q) for quiting / * for menu >>').strip().title().upper()
+            # get_daily_stock_exchange(df)
+
+    print('************* THANKS FOR VISITING ...! *************')
     return
+
 
 if __name__ == '__main__':
 
-    print('''   
+    print('''
 ****************************************************************************
+******                                                                ******
 ******              Welcome to the STOCK MARKET section               ******
+******                                                                ******
 ****************************************************************************''')
 
-    print(get_daily_stock_exchange(get_stock_table_report(domain)))
-    
-    
-    
+    get_daily_stock_exchange(get_stock_table_report(domain))
