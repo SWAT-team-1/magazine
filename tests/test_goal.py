@@ -1,9 +1,5 @@
 from magazine.goal import *
-def test_report():
-    domain ='https://www.goal.com/en/live-scores'
-    goal_url = f'{domain}'
-    excepted = get_all_data1(goal_url)
-    assert '****** ⚽⚽ Macth Time ⚽⚽ ******' in excepted
+
 def test_team():
     domain ='https://www.goal.com/en/live-scores'
     goal_url = f'{domain}'

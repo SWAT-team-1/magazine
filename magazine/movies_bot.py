@@ -1,6 +1,8 @@
 import requests
 from bs4 import BeautifulSoup 
-
+import colorama 
+colorama.init()
+from colorama import Fore, Style
 
 url = "https://www.tajcinemas.com/"
 def cinemas_details(url):
@@ -41,11 +43,13 @@ def cinemas_details(url):
 
 
 
-def movie_by_gen():
+def movie_by_gen(user_name):
     """
     function to get movie by genre
-    """ 
-    type_of = input("What kind of movie do you want?:\U0001F50D ").capitalize() 
+    """
+    print(Fore.GREEN + 'Bot: What kind of movie do you want?:\U0001F50D' + Style.RESET_ALL)
+    print(Fore.BLUE + f'{user_name}: ' + Style.RESET_ALL,end="")
+    type_of = input().capitalize() 
     url = f"https://data-imdb1.p.rapidapi.com/movie/byGen/{type_of}/"
 
     querystring = {"page_size":"50"}
@@ -127,12 +131,16 @@ def rating_movie():
 
 
 
-def movies_by_year_and_genre():
+def movies_by_year_and_genre(user_name):
     """
     function to get movie by genre
     """ 
-    type_of_movie = input("What kind of movie do you want?:\U0001F50D ").capitalize() 
-    year_of_movie = input("What year are you looking for?:\U0001F50D ")
+    print(Fore.GREEN + 'Bot: What kind of movie do you want?:\U0001F50D' + Style.RESET_ALL)
+    print(Fore.BLUE + f'{user_name}: ' + Style.RESET_ALL,end="")
+    type_of_movie = input().capitalize()
+    print(Fore.GREEN + 'Bot: What year are you looking for?:\U0001F50D' + Style.RESET_ALL)
+    print(Fore.BLUE + f'{user_name}: ' + Style.RESET_ALL,end="")
+    year_of_movie = input()
 
     url = f"https://data-imdb1.p.rapidapi.com/movie/byYear/{year_of_movie}/byGen/{type_of_movie}/"
     querystring = {"page_size":"50"}
@@ -157,7 +165,7 @@ def movies_by_year_and_genre():
 # movies_by_year_and_genre()
 
 
-def all_movie_function():
+def all_movie_function(user_name='User'):
     """
     function to collect all functions
     """ 
@@ -169,62 +177,60 @@ def all_movie_function():
                                                \U0001F4A5\U0001F4A5\U0001F3A5Movie Section \U0001F3A5\U0001F4A5\U0001F4A5
                                                \U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5''')
  
-        user_input = input(f'''
-
-Choose from the list:
-
+        print(f'''
 \U0001F3A5 If you want to know the movies available in the cinema, write (1)
 \U0001F3A5 If you want to search for films by genre, write (2)
 \U0001F3A5 If you want to search for upcoming  movies, write (3)
 \U0001F3A5 If you want to search for movies rating , write(4) 
 \U0001F3A5 if you want to search for by genre and year, write(5)
-for quit, write (q)
 ''')
 
-
+        print(Fore.GREEN + 'Bot: Choose from the list or (q) to quit' + Style.RESET_ALL)
+        print(Fore.BLUE + f'{user_name}: ' + Style.RESET_ALL,end="")
+        user_input = input()  
         if user_input == "1":
             cinemas_details(url)
-            user_input = input(f'''
-Wirte (q)uit or (b)ack to list
-''')
+            print(Fore.GREEN + 'Bot: Write (q)uit or (b)ack to list' + Style.RESET_ALL)
+            print(Fore.BLUE + f'{user_name}: ' + Style.RESET_ALL,end="")
+            user_input = input()  
             if user_input == 'b':
                 continue
 
         elif user_input == "2":
-            movie_by_gen()
-            user_input = input(f'''
-wirte (q)uit or (b)ack to list
-''')
+            movie_by_gen(user_name)
+            print(Fore.GREEN + 'Bot: Write (q)uit or (b)ack to list' + Style.RESET_ALL)
+            print(Fore.BLUE + f'{user_name}: ' + Style.RESET_ALL,end="")
+            user_input = input()  
             if user_input == 'b':
                 continue
 
         elif user_input == "3":
             upcoming_movies()
-            user_input = input(f'''
-wirte (q)uit or (b)ack to list
-            ''')
+            print(Fore.GREEN + 'Bot: Write (q)uit or (b)ack to list' + Style.RESET_ALL)
+            print(Fore.BLUE + f'{user_name}: ' + Style.RESET_ALL,end="")
+            user_input = input()  
             if user_input == 'b':
                 continue
 
 
         elif user_input == "4":
             rating_movie()
-            user_input = input(f'''
-wirte (q)uit or (b)ack to list
-            ''')
+            print(Fore.GREEN + 'Bot: Write (q)uit or (b)ack to list' + Style.RESET_ALL)
+            print(Fore.BLUE + f'{user_name}: ' + Style.RESET_ALL,end="")
+            user_input = input()  
             if user_input == 'b':
                 continue
 
         elif user_input == "5":
-            movies_by_year_and_genre()
-            user_input = input(f'''
-wirte (q)uit or (b)ack to list
-            ''')
+            movies_by_year_and_genre(user_name)
+            print(Fore.GREEN + 'Bot: Write (q)uit or (b)ack to list' + Style.RESET_ALL)
+            print(Fore.BLUE + f'{user_name}: ' + Style.RESET_ALL,end="")
+            user_input = input()  
             if user_input == 'b':
                 continue
 
         if user_input == 'q':
-            quit()
+            break
         else :
             continue
             # user_input = input(f'''

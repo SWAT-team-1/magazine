@@ -16,6 +16,6 @@ def test_get_date():
     assert actual == expected
 
 def test_get_time():
-    expected = x.strftime("%X")
-    actual = get_response('time')[12:20]
+    expected = x.strftime("%X")[:5]
+    actual = get_response('time')[12:17]
     assert actual == expected

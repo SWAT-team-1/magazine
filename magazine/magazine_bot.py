@@ -4,6 +4,10 @@ import colorama
 colorama.init()
 from colorama import Fore, Style
 from magazine.weather import get_weather
+from magazine.goal import get_all_data1
+from magazine.stock_market_bot import get_daily_stock_exchange, get_stock_table_report
+from magazine.movies_bot import all_movie_function
+from magazine.translate_feature import get_translater
 
 def message_probability(user_message, recognised_words, single_response=False, required_words=[]):
     """
@@ -55,6 +59,10 @@ def check_all_messages(message):
     response('In which Country or city', ['weather', 'temperature', 'what is the temperature', 'what is the weather'])
     response(resp.date(),['today','date'])
     response(resp.time(),['time'])
+    response('soccer match schedule',['soccer','football','match','sport','sports'])
+    response('stock market',['stock','market','ase'])
+    response('movies',['movies','movie','cinema'])
+    response('Write your word or sentence',['translate','translater','translation'], required_words=['translate'])
 
     best_match = max(highest_prob_list, key=highest_prob_list.get)
 
@@ -76,6 +84,28 @@ def get_response(user_input, user_name=None):
         print(Fore.BLUE + user_name.capitalize() +': ' + Style.RESET_ALL, end="")
         user_input = input()
         response = get_weather(user_input)
+
+    if response == 'soccer match schedule':
+        url = 'https://www.goal.com/en/live-scores'
+        response = get_all_data1(url, user_name)
+    
+    if response == 'stock market':
+        print(Fore.RED + '''
+****************************************************************************
+******                                                                ******
+******              Welcome to the STOCK MARKET section               ******
+******                                                                ******
+****************************************************************************'''+ Style.RESET_ALL)
+        url = 'https://www.ase.com.jo/en/bulletins/daily/new'
+        get_daily_stock_exchange(get_stock_table_report(url), user_name)
+        response = 'Do you want anything else?'
+    
+    if response == 'movies':
+        all_movie_function(user_name)
+        response = 'Do you want anything else?'
+    
+    if response == 'Write your word or sentence':
+        response = get_translater(user_name=user_name)
     return response
 
 

@@ -2,6 +2,9 @@ from pandas.core.frame import DataFrame
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
+import colorama 
+colorama.init()
+from colorama import Fore, Style
 # Major financial data & indicators for companies listed at ASE
 
 domain = 'https://www.ase.com.jo/en/bulletins/daily/new'
@@ -52,7 +55,7 @@ def get_stock_table_report(url):
     return df
 
 
-def get_daily_stock_exchange(df):
+def get_daily_stock_exchange(df,user_name='User'):
     """
     get_daily_stock_exchange : 
     argument : dataframe
@@ -64,8 +67,9 @@ def get_daily_stock_exchange(df):
         print("******* MENU ==> Daily Stock Exchange (ASE) (1)")
         print("******* MENU ==> Top Transactions (2)")
         print("******* MENU ==> Search for Stock (3)")
-        response = input(
-            '****** Please choose from the menu >>> ').strip().title().upper()
+        print(Fore.GREEN + 'Bot: Please choose from the menu or q to quit' + Style.RESET_ALL)
+        print(Fore.BLUE + f'{user_name}: ' + Style.RESET_ALL,end="")
+        response = input().strip().title().upper()
         ######## MENU ==> Daily Stock Exchange (ASE) ########
         ######## Equasion of percentage ########
         if response == '1':
@@ -96,8 +100,9 @@ def get_daily_stock_exchange(df):
             for j in range(len(df.index)):
                 list_of_Symbols.append(df['symbol'][j])
             print('****** STOCKS => ', list_of_Symbols)
-            response = input(
-                '****** Please enter the Stock symbol for more details (ex: ARBK) or q for quiting / * for menu >>> ').strip().title().upper()
+            print(Fore.GREEN + 'Bot: Pick the Stock symbol for more details (ex: ARBK) or q for quiting / * for menu' + Style.RESET_ALL)
+            print(Fore.BLUE + f'{user_name}: ' + Style.RESET_ALL,end="")
+            response = input().strip().title().upper()
             while response != 'Q':
                 if response == '*':
                     break
@@ -109,8 +114,9 @@ def get_daily_stock_exchange(df):
                 if found:
                     print(
                         f" ****** X {response} this stock is NOT found ..!  ******")
-
-                response = input(' ****** Search for another stock or (q) for quiting / * for menu >>').strip().title().upper()
+                print(Fore.GREEN + 'Bot: Search for another stock or (q) for quiting / * for menu' + Style.RESET_ALL)
+                print(Fore.BLUE + f'{user_name}: ' + Style.RESET_ALL,end="")
+                response = input().strip().title().upper()
             # get_daily_stock_exchange(df)
 
     print('************* THANKS FOR VISITING ...! *************')
