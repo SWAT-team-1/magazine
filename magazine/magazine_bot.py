@@ -4,6 +4,8 @@ import colorama
 colorama.init()
 from colorama import Fore, Style
 from magazine.weather import get_weather
+from magazine.goal import get_all_data1
+from magazine.stock_market_bot import get_daily_stock_exchange, get_stock_table_report
 
 def message_probability(user_message, recognised_words, single_response=False, required_words=[]):
     """
@@ -44,7 +46,7 @@ def check_all_messages(message):
 
     response(resp.greeting(), ['hello', 'hi', 'hey', 'sup', 'heyo','hola','welcome'], single_response=True)
     response('I\'m doing fine, and you?', ['how', 'are', 'you', 'doing'], required_words=['how'])
-    response(resp.thanks(), ['thank', 'thanks','helpful'], single_response=True)
+    response(resp.thanks(), ['thank', 'thanks','helpful', 'cool'], single_response=True)
     response('My name is Magazine', ['name','what is your name', 'whats your name'])
     response(resp.options(),['help','provide','offer','do','can do'])
     response(resp.good(),['good','great','fine','okay', 'ok','well'])
@@ -55,6 +57,8 @@ def check_all_messages(message):
     response('In which Country or city', ['weather', 'temperature', 'what is the temperature', 'what is the weather'])
     response(resp.date(),['today','date'])
     response(resp.time(),['time'])
+    response('soccer match schedule',['soccer','match','football','sport'])
+    response('stock market',['stock','market','ase'])
 
     best_match = max(highest_prob_list, key=highest_prob_list.get)
 
@@ -76,6 +80,22 @@ def get_response(user_input, user_name=None):
         print(Fore.BLUE + user_name.capitalize() +': ' + Style.RESET_ALL, end="")
         user_input = input()
         response = get_weather(user_input)
+
+    if response == 'soccer match schedule':
+        url = "https://www.goal.com/en/live-scores"
+        get_all_data1(url)
+        response = 'Do you want any thing else?'
+
+    if response == 'stock market':
+        print(Fore.RED + '''
+****************************************************************************
+******                                                                ******
+******              Welcome to the STOCK MARKET section               ******
+******                                                                ******
+****************************************************************************'''+ Style.RESET_ALL)
+        url = 'https://www.ase.com.jo/en/bulletins/daily/new'
+        get_daily_stock_exchange(get_stock_table_report(url))
+        response = 'Do you want any thing else?'
     return response
 
 

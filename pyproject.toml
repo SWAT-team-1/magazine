@@ -8,6 +8,8 @@ authors = ["moayadalhaj <moayad.alhaj21@gmail.com>"]
 
 python = "^3.9"
 emoji = "^1.6.1"
+arabic-reshaper = "^2.1.3"
+googletrans = "4.0.0-rc1"
 colorama = "^0.4.4"
 jupyter = "^1.0.0"
 pandas = "^1.3.4"

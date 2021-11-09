@@ -9,7 +9,7 @@ test_df = get_stock_table_report(domain)
 def test_get_stock_table_report_rows():
     # index = test_df.index    
     actual = len(test_df.index)
-    expected = 100
+    expected = 105
     assert actual == expected
 
 # check if names not null

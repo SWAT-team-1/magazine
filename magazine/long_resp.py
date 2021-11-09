@@ -34,7 +34,19 @@ def thanks():
     return response
 
 def options():
-    response = 'I offer information about date, time, weather, soccer match schedule, movies, stock market and tranlation!'
+    response = f'''I offer information about Date {emoji.emojize(':calendar:')}
+
+                               Time {emoji.emojize(':ten_o’clock:')}
+    
+                               Weather {emoji.emojize(':sunrise_over_mountains:')}
+    
+                               Soccer match schedule {emoji.emojize(':soccer_ball:')}
+    
+                               Movies {emoji.emojize(':clapper_board:')}
+    
+                               Stock market {emoji.emojize(':chart_increasing:')}
+    
+                               Tranlation {emoji.emojize(':speech_balloon:')}'''
     return response
 
 def good():
