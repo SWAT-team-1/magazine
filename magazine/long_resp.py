@@ -2,6 +2,10 @@ import random
 import datetime
 import emoji
 
+"""
+This file is to get the responses for the bot when 
+the user chatting with the bot depending on the user inputs
+"""
 r_eating = "I don't like eating anything because I'm a bot obviously!"
 r_advice = "If I were you, I will sleep!"
 

@@ -3,11 +3,19 @@ import colorama
 colorama.init()
 from colorama import Fore, Style
 import emoji
-from api_key import api_key
+from magazine.api_key import api_key
+
 api_key = api_key
-emoji_dic = {'clear sky':':sun:','overcast clouds':':thought_balloon:' ,'few clouds':':sun_behind_cloud:','scattered clouds':':thought_balloon:','Boken clouds':':thought_balloon:','Shower rain':':cloud with rain:' ,'rain':':sun_behind_rain_cloud:','thunderstorm':':cloud_with_lightning:','snow':':snowflake:','mist':':fog:'}
+emoji_dic = {'clear sky':':sun:','overcast clouds':':thought_balloon:' ,'few clouds':':sun_behind_cloud:','scattered clouds':':thought_balloon:','broken clouds':':thought_balloon:','Shower rain':':cloud with rain:' ,'rain':':sun_behind_rain_cloud:','thunderstorm':':cloud_with_lightning:','snow':':snowflake:','mist':':fog:', 'haze':':fog:'}
 
 def get_weather(city_name):
+    """
+    A function that request the data for wanted city weather and returb the temperature and the weather 
+    of this city or country
+
+    input: city name or country name
+    output: temperature and weather of this city or country
+    """
     api_url = "http://api.openweathermap.org/data/2.5/weather?q={}&units=metric&appid={}".format(city_name, api_key)
 
     response = requests.get(api_url)
