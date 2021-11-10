@@ -3,8 +3,11 @@ from bs4 import BeautifulSoup
 import colorama 
 colorama.init()
 from colorama import Fore, Style
+import datetime
 
 url = "https://www.tajcinemas.com/"
+
+genres = ["Drama","Action","Comedy","Fantasy","Horror","Mystery","Romance","Thriller"]
 def cinemas_details(url):
     """
     function to get title, type, description and time for movie
@@ -23,7 +26,7 @@ def cinemas_details(url):
     
     all_data = []
     for i in range(len(movie_titles)-4):
-        all_data.append(f"    ******************************************************************{i+1}********************************************************     ")
+        all_data.append(f"{Fore.YELLOW}   ******************************************************************{i+1}********************************************************      {Style.RESET_ALL}")
         all_data.append("\U0001F3A5:"+movie_titles[i].text)
         all_data.append("\U0001F534:"+movie_types[i].text)
         all_data.append("\U0001F4DD:"+movie_descriptions[i].text.strip())
@@ -50,6 +53,10 @@ def movie_by_gen(user_name):
     print(Fore.GREEN + 'Bot: What kind of movie do you want?:\U0001F50D' + Style.RESET_ALL)
     print(Fore.BLUE + f'{user_name}: ' + Style.RESET_ALL,end="")
     type_of = input().capitalize() 
+    while not type_of.strip() in genres:
+        print(Fore.GREEN + 'Bot: Please, enter the kind of movie do you want?:\U0001F50D' + Style.RESET_ALL)
+        print(Fore.BLUE + f'{user_name}: ' + Style.RESET_ALL,end="")
+        type_of = input().capitalize() 
     url = f"https://data-imdb1.p.rapidapi.com/movie/byGen/{type_of}/"
 
     querystring = {"page_size":"50"}
@@ -61,14 +68,14 @@ def movie_by_gen(user_name):
     response = requests.request("GET", url, headers=headers, params=querystring)
     data = response.json()
     gen_list = []
-    print(f"                                         ****************************************")
-    print(f"                                         ********List of {type_of} movies \U0001F3A5 :********")
-    print(f"                                         *****************************************")
+    print(f"{Fore.YELLOW}****************************************")
+    print(f"********List of {type_of} movies \U0001F3A5 :******")
+    print(f"*****************************************{Style.RESET_ALL}")
     print(" ")
     for i in range (10):
         gen_list.append (data['results'][i]['title'])
-        print(f'                                            {i+1}-'+gen_list[i])
-        print("                                            --------------------------")
+        print(f'{i+1}-'+gen_list[i])
+        print("--------------------------")
     return gen_list
 
 # movie_by_gen()
@@ -87,15 +94,15 @@ def upcoming_movies():
         }
     response = requests.request("GET", url, headers=headers, params=querystring)
     data = response.json()
-    print(f"                                         ****************************************")
-    print(f"                                         ********List of Upcoming Movies \U0001F3A5 :****")
-    print(f"                                         *****************************************")
+    print(f"{Fore.YELLOW}****************************************")
+    print(f"********List of Upcoming Movies \U0001F3A5 :****")
+    print(f"***************************************** {Style.RESET_ALL}")
     print(" ")
     for i in range (10):
       upcoming_name = data['results'][i]['title']
       upcoming_date = data['results'][i]['release']
-      print(f'                                       Release Date for "{upcoming_name}" is {upcoming_date}')
-      print("                                       ----------------------------------------------------------")
+      print(f'Release Date for "{upcoming_name}" is {upcoming_date}')
+      print("----------------------------------------------------------")
     # return upcoming_name,upcoming_date
 # upcoming_movies()
 
@@ -116,15 +123,15 @@ def rating_movie():
     response = requests.request("GET", url, headers=headers, params=querystring)
     data = response.json()
     print(" ")
-    print(f"                                         ****************************************")
-    print(f"                                         ********List of Upcoming Movies \U0001F3A5 :****")
-    print(f"                                         *****************************************")
+    print(f"{Fore.YELLOW}****************************************")
+    print(f"********List of Upcoming Movies \U0001F3A5 :****")
+    print(f"*****************************************{Style.RESET_ALL}")
     print(" ")
     for i in range (10):
         movie_name= (data['results'][i]['title'])
         movie_rate = ( data['results'][i]['rating'])
-        print(f'                                \U00002B50{movie_name} movie Rating is {movie_rate}')
-        print("                                  ------------------------------------------------------")
+        print(f'\U00002B50{movie_name} movie Rating is {movie_rate}')
+        print("------------------------------------------------------")
     return movie_name,movie_rate
 # rating_movie()
 
@@ -138,9 +145,20 @@ def movies_by_year_and_genre(user_name):
     print(Fore.GREEN + 'Bot: What kind of movie do you want?:\U0001F50D' + Style.RESET_ALL)
     print(Fore.BLUE + f'{user_name}: ' + Style.RESET_ALL,end="")
     type_of_movie = input().capitalize()
-    print(Fore.GREEN + 'Bot: What year are you looking for?:\U0001F50D' + Style.RESET_ALL)
+    while not type_of_movie.strip() in genres:
+        print(Fore.GREEN + 'Bot: Please, enter the kind of movie do you want?:\U0001F50D' + Style.RESET_ALL)
+        print(Fore.BLUE + f'{user_name}: ' + Style.RESET_ALL,end="")
+        type_of_movie = input().capitalize() 
+    print(Fore.GREEN + 'Bot: What year are you looking for?\U0001F50D' + Style.RESET_ALL)
     print(Fore.BLUE + f'{user_name}: ' + Style.RESET_ALL,end="")
     year_of_movie = input()
+    x = datetime.datetime.now()
+    date = x.strftime('%Y')
+    year_list = [f'{year}' for year in range(1960,int(date)+1)]
+    while not year_of_movie.strip() in year_list:
+        print(Fore.GREEN + 'Bot: Please, enter the year are you looking for?\U0001F50D' + Style.RESET_ALL)
+        print(Fore.BLUE + f'{user_name}: ' + Style.RESET_ALL,end="")
+        year_of_movie = input()
 
     url = f"https://data-imdb1.p.rapidapi.com/movie/byYear/{year_of_movie}/byGen/{type_of_movie}/"
     querystring = {"page_size":"50"}
@@ -152,14 +170,14 @@ def movies_by_year_and_genre(user_name):
     response = requests.request("GET", url, headers=headers, params=querystring)
     data = response.json()
     print(" ")
-    print("                                          *******************************")
-    print(f'                                         *List of {type_of_movie} movie in {year_of_movie}\U0001F3A5*')
-    print("                                          *******************************")
+    print(f"{Fore.YELLOW}*******************************")
+    print(f'*List of {type_of_movie} movie in {year_of_movie}\U0001F3A5*')
+    print(f"*******************************{Style.RESET_ALL}")
     print(" ")
     for i in range (10):
         year_and_genre = (data['results'][i]['title'])
-        print(f'                                              {year_and_genre}')
-        print("                                             ------------------------")
+        print(f'{year_and_genre}')
+        print("------------------------")
     return year_and_genre
 
 # movies_by_year_and_genre()
@@ -173,9 +191,9 @@ def all_movie_function(user_name='User'):
     while user_input != 'q':
 
         print('''   
-                                               \U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5
-                                               \U0001F4A5\U0001F4A5\U0001F3A5Movie Section \U0001F3A5\U0001F4A5\U0001F4A5
-                                               \U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5''')
+                \U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5
+                \U0001F4A5\U0001F4A5\U0001F3A5Movie Section \U0001F3A5\U0001F4A5\U0001F4A5
+                \U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5\U0001F4A5''')
  
         print(f'''
 \U0001F3A5 If you want to know the movies available in the cinema, write (1)
