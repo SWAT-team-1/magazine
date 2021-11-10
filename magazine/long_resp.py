@@ -34,19 +34,19 @@ def thanks():
     return response
 
 def options():
-    response = f'''I offer information about Date {emoji.emojize(':calendar:')}
+    response = f'''I offer information about date {emoji.emojize(':calendar:')}
+                                         
+                               time {emoji.emojize(':ten_o’clock:')}
 
-                               Time {emoji.emojize(':ten_o’clock:')}
-    
-                               Weather {emoji.emojize(':sunrise_over_mountains:')}
-    
-                               Soccer match schedule {emoji.emojize(':soccer_ball:')}
-    
-                               Movies {emoji.emojize(':clapper_board:')}
-    
-                               Stock market {emoji.emojize(':chart_increasing:')}
-    
-                               Tranlation {emoji.emojize(':speech_balloon:')}'''
+                               weather {emoji.emojize(':thought_balloon:')}
+                                         
+                               soccer match schedule {emoji.emojize(':soccer_ball:')}
+                                         
+                               movies {emoji.emojize(':clapper_board:')}
+                                         
+                               stock market {emoji.emojize(':chart_increasing:')}
+                                         
+                               translation {emoji.emojize(':speech_balloon:')}'''
     return response
 
 def good():
@@ -72,6 +72,12 @@ def time():
     emoji_chr = emoji.emojize(':ten_o’clock:')
     response = f'The time is {now_time} {emoji_chr}'
     return response
-
+def joke():
+    response = ["I ate a clock yesterday, it was very time-consuming.",
+    "I can’t believe I got fired from the calendar factory. All I did was take a day off!",
+    "I went to see the doctor about my short-term memory problems — the first thing he did was make me pay in advance",
+    "You have two parts of the brain, “left” and “right”. On the left side, there’s nothing right and on the right side, there’s nothing left."
+    ][random.randrange(4)]
+    return response
 if __name__ == '__main__':
     pass

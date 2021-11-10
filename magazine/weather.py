@@ -6,7 +6,7 @@ import emoji
 from magazine.api_key import api_key
 
 api_key = api_key
-emoji_dic = {'clear sky':':sun:','overcast clouds':':thought_balloon:' ,'few clouds':':sun_behind_cloud:','scattered clouds':':thought_balloon:','broken clouds':':thought_balloon:','Shower rain':':cloud with rain:' ,'rain':':sun_behind_rain_cloud:','thunderstorm':':cloud_with_lightning:','snow':':snowflake:','mist':':fog:', 'haze':':fog:'}
+emoji_dic = {'clear sky':':sun:','overcast clouds':':thought_balloon:' ,'few clouds':':sun_behind_cloud:','scattered clouds':':thought_balloon:','broken clouds':':thought_balloon:','Shower rain':':cloud with rain:' ,'rain':':sun_behind_rain_cloud:','thunderstorm':':cloud_with_lightning:','snow':':snowflake:','mist':':fog:', 'haze':':fog:','smoke':':fog:','fog':':fog:','dust':':fog:'}
 
 def get_weather(city_name):
     """

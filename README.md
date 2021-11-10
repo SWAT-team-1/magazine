@@ -7,6 +7,26 @@
 - Yousef Mohammad Jariry
 - Haneen Hashlamoun
 
+## Installation
+
+To make this application works:
+
+- clone the repository to your local machine
+
+- then install these libraries into your repository
+
+### Librarries
+
+- emoji
+- arabic-reshaper
+- googletrans
+- colorama
+- pandas
+- numpy
+- sklearn
+- beautifulsoup4
+- requests
+
 ## Project Idea
 
 Chat bot in the command line will give prompts based on the user's answer. It will give the user topics to explore (weather , sports , movies etc ...)

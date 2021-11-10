@@ -6,6 +6,9 @@ from colorama import Fore, Style
 from magazine.weather import get_weather
 from magazine.goal import get_all_data1
 from magazine.stock_market_bot import get_daily_stock_exchange, get_stock_table_report
+from magazine.movies_bot import all_movie_function
+from magazine.translate_feature import get_translater
+import emoji
 
 def message_probability(user_message, recognised_words, single_response=False, required_words=[]):
     """
@@ -53,15 +56,19 @@ def check_all_messages(message):
     response(resp.bad(),['bad', 'sad'])
     response(resp.goodbye(), ['quit', 'q', 'exit','bye','goodbye','see you later', 'nice chatting to you, bye', 'till next time'])
     response(resp.r_advice, ['give', 'advice'], required_words=['advice'])
-    response(resp.r_eating, ['what', 'you', 'eat'], required_words=['you', 'eat'])
+    response(resp.r_eating, ['what', 'you', 'eat'], required_words=['eat'])
     response('In which Country or city', ['weather', 'temperature', 'what is the temperature', 'what is the weather'])
     response(resp.date(),['today','date'])
     response(resp.time(),['time'])
-    response('soccer match schedule',['soccer','match','football','sport'])
+    response('soccer match schedule',['soccer','football','match','sport','sports'])
     response('stock market',['stock','market','ase'])
+    response('movies',['movies','movie','cinema'])
+    response('Write your word or sentence',['translate','translater','translation'])
+    response(f"{resp.joke()}{emoji.emojize(':winking_face:')}",['laugh','joke','funny','sad'])
+    response('on the contrary, my mind always learning and growing!',['stupid','donkey','slow','hate','dog','hill'])
+    response(f"That means a lot! I am glad to be your friend {emoji.emojize(':smiling_face_with_hearts:')}",['love','like'],required_words=['you'])
 
     best_match = max(highest_prob_list, key=highest_prob_list.get)
-
     return resp.unknown() if highest_prob_list[best_match] < 1 else best_match
 
 
@@ -94,8 +101,15 @@ def get_response(user_input, user_name=None):
 ******                                                                ******
 ****************************************************************************'''+ Style.RESET_ALL)
         url = 'https://www.ase.com.jo/en/bulletins/daily/new'
-        get_daily_stock_exchange(get_stock_table_report(url))
-        response = 'Do you want any thing else?'
+        get_daily_stock_exchange(get_stock_table_report(url), user_name)
+        response = 'Do you want anything else?'
+    
+    if response == 'movies':
+        all_movie_function(user_name)
+        response = 'Do you want anything else?'
+    
+    if response == 'Write your word or sentence':
+        response = get_translater(user_name=user_name)
     return response
 
 

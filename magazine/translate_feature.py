@@ -114,6 +114,7 @@ languages = {
 }
 """ get_translater take tow argumentes the first one for the word wanted to tranlslate the sec one for the language wanted"""
 def get_translater(user_input=None , lang=None ,user_name='User'):
+    
     if user_input is None:
         print(Fore.GREEN+'Bot: your word or sentence,to which language'+Style.RESET_ALL)
         print(Fore.BLUE+f'{user_name}: '+Style.RESET_ALL,end='')
@@ -138,4 +139,4 @@ def get_translater(user_input=None , lang=None ,user_name='User'):
     return translation.text
 if __name__ == '__main__':
     
-    print(get_translater('Mohammad'))
+    print(get_translater(user_name='Mohammad'))
