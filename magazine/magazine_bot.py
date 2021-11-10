@@ -49,11 +49,11 @@ def check_all_messages(message):
 
     response(resp.greeting(), ['hello', 'hi', 'hey', 'sup', 'heyo','hola','welcome'], single_response=True)
     response('I\'m doing fine, and you?', ['how', 'are', 'you', 'doing'], required_words=['how'])
-    response(resp.thanks(), ['thank', 'thanks','helpful'], single_response=True)
-    response('My name is Magazine an intelligent bot.', ['name','what is your name', 'whats your name'])
-    response(resp.options(),['help','provide','offer','do'],required_words=['what'])
-    response(resp.good(),['good','great','fine','okay', 'ok','well','cool'])
-    response(resp.bad(),['bad', 'sad','unhappy','poor'])
+    response(resp.thanks(), ['thank', 'thanks','helpful', 'cool'], single_response=True)
+    response('My name is Magazine', ['name','what is your name', 'whats your name'])
+    response(resp.options(),['help','provide','offer','do','can do'])
+    response(resp.good(),['good','great','fine','okay', 'ok','well'])
+    response(resp.bad(),['bad', 'sad'])
     response(resp.goodbye(), ['quit', 'q', 'exit','bye','goodbye','see you later', 'nice chatting to you, bye', 'till next time'])
     response(resp.r_advice, ['give', 'advice'], required_words=['advice'])
     response(resp.r_eating, ['what', 'you', 'eat'], required_words=['eat'])
@@ -67,7 +67,7 @@ def check_all_messages(message):
     response(f"{resp.joke()}{emoji.emojize(':winking_face:')}",['laugh','joke','funny','sad'])
     response('on the contrary, my mind always learning and growing!',['stupid','donkey','slow','hate','dog','hill'])
     response(f"That means a lot! I am glad to be your friend {emoji.emojize(':smiling_face_with_hearts:')}",['love','like'],required_words=['you'])
-    
+
     best_match = max(highest_prob_list, key=highest_prob_list.get)
     return resp.unknown() if highest_prob_list[best_match] < 1 else best_match
 
@@ -89,9 +89,10 @@ def get_response(user_input, user_name=None):
         response = get_weather(user_input)
 
     if response == 'soccer match schedule':
-        url = 'https://www.goal.com/en/live-scores'
-        response = get_all_data1(url, user_name)
-    
+        url = "https://www.goal.com/en/live-scores"
+        get_all_data1(url)
+        response = 'Do you want any thing else?'
+
     if response == 'stock market':
         print(Fore.RED + '''
 ****************************************************************************
