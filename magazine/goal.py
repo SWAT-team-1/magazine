@@ -92,7 +92,7 @@ def get_all_data1(url,user_name = 'User'):
     print(Fore.RED + '''
 ****************************************************************************
 ******                                                                ******
-******              Welcome to the sport section \U000026BD           ******
+******              Welcome to the sport section \U000026BD                   ******
 ******                                                                ******
 ****************************************************************************\n'''+ Style.RESET_ALL)
 
@@ -102,7 +102,7 @@ def get_all_data1(url,user_name = 'User'):
         print(f' ****************** {trophy} {competition_list[i]} {trophy} ********************\n')
     print(Fore.GREEN + 'Bot: Type competition name or q for quiting' + Style.RESET_ALL)
     print(Fore.BLUE + f'{user_name}: ' + Style.RESET_ALL,end="")
-    response = input().strip().title()
+    response = input().strip().lower().title()
     while response != 'Q':
         if  response in competition_list:
             print(data_string[competition_list.index(response)])
