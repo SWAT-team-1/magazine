@@ -10,7 +10,9 @@ response = requests.get(goal_url)
 html_text = response.text
 
 "get competition function take the url as an argument and return the competition string"
-def get_competition_name(url):
+def get_competition_name(url=domain):
+    response = requests.get(url)
+    html_text = response.text
     soup = BeautifulSoup(html_text, "html.parser")
     competition_result = soup.find_all("span", class_="competition-name")
     competition_string = ""
@@ -21,7 +23,9 @@ def get_competition_name(url):
     return competition_list
 
 "get team function take the url as an argument and return the team list"
-def get_team_name(url):
+def get_team_name(url=domain):
+    response = requests.get(url)
+    html_text = response.text
     soup = BeautifulSoup(html_text, "html.parser")
     team_result = soup.find_all("span", class_="match-row__team-name")
     team_list = []
@@ -113,7 +117,6 @@ def get_all_data1(url,user_name = 'User'):
         response=input().strip().title()    
     return "I hope you get the infromtion you need"
 if __name__ =='__main__':
-    
     get_all_data1(goal_url)
    
 

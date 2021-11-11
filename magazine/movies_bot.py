@@ -46,7 +46,7 @@ def cinemas_details(url):
 
 
 
-def movie_by_gen(user_name):
+def movie_by_gen(user_name='User'):
     """
     function to get movie by genre
     """
@@ -138,7 +138,7 @@ def rating_movie():
 
 
 
-def movies_by_year_and_genre(user_name):
+def movies_by_year_and_genre(user_name='User'):
     """
     function to get movie by genre
     """ 
