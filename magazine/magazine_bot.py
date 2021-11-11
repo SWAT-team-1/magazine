@@ -49,11 +49,11 @@ def check_all_messages(message):
 
     response(resp.greeting(), ['hello', 'hi', 'hey', 'sup', 'heyo','hola','welcome'], single_response=True)
     response('I\'m doing fine, and you?', ['how', 'are', 'you', 'doing'], required_words=['how'])
-    response(resp.thanks(), ['thank', 'thanks','helpful', 'cool'], single_response=True)
-    response('My name is Magazine', ['name','what is your name', 'whats your name'])
+    response(resp.thanks(), ['thank', 'thanks','helpful', 'cool','awesome'], single_response=True)
+    response('My name is Magazine an intelligent bot', ['name','what is your name', 'whats your name'])
     response(resp.options(),['help','provide','offer','do','can do'])
     response(resp.good(),['good','great','fine','okay', 'ok','well'])
-    response(resp.bad(),['bad', 'sad'])
+    response(resp.bad(),['bad', 'sad','unhappy'])
     response(resp.goodbye(), ['quit', 'q', 'exit','bye','goodbye','see you later', 'nice chatting to you, bye', 'till next time'])
     response(resp.r_advice, ['give', 'advice'], required_words=['advice'])
     response(resp.r_eating, ['what', 'you', 'eat'], required_words=['eat'])
@@ -90,8 +90,7 @@ def get_response(user_input, user_name=None):
 
     if response == 'soccer match schedule':
         url = "https://www.goal.com/en/live-scores"
-        get_all_data1(url)
-        response = 'Do you want any thing else?'
+        response = get_all_data1(url,user_name=user_name.capitalize())
 
     if response == 'stock market':
         print(Fore.RED + '''
@@ -101,15 +100,15 @@ def get_response(user_input, user_name=None):
 ******                                                                ******
 ****************************************************************************'''+ Style.RESET_ALL)
         url = 'https://www.ase.com.jo/en/bulletins/daily/new'
-        get_daily_stock_exchange(get_stock_table_report(url), user_name)
+        get_daily_stock_exchange(get_stock_table_report(url), user_name.capitalize())
         response = 'Do you want anything else?'
     
     if response == 'movies':
-        all_movie_function(user_name)
+        all_movie_function(user_name.capitalize())
         response = 'Do you want anything else?'
     
     if response == 'Write your word or sentence':
-        response = get_translater(user_name=user_name)
+        response = get_translater(user_name=user_name.capitalize())
     return response
 
 
